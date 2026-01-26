@@ -11,3 +11,17 @@
 4. Print: `"The temperature is now 30"`.
 
 ---
+
+
+## 🚀 Program 2: The Greeting Update
+
+### The Goal:
+
+Create a variable named user and set it to your name (e.g., "Mayur").
+
+1. Print: `"Hello, Mayur"`.
+
+2. Change the user variable to `"World"`.
+
+3. Print: `"Hello, World"`.
+
