@@ -1,0 +1,10 @@
+[[bin]]
+name = "temp_tracker"
+path = "src/bin/day1/temp_tracker.rs"
+
+[package]
+name = "rust-workspace"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
