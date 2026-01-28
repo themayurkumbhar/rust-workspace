@@ -6,6 +6,10 @@ path = "src/bin/day1/temp_tracker.rs"
 name = "greetings"
 path = "src/bin/day1/greetings.rs"
 
+[[bin]]
+name = "constants"
+path = "src/bin/day2/constants.rs"
+
 
 [package]
 name = "rust-workspace"
