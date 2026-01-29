@@ -23,7 +23,7 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install Rust toolchain and cache dependencies
       uses: actions-rs/toolchain@v1
@@ -35,13 +35,13 @@ jobs:
     - name: Build all binaries
       run: cargo build --bins --verbose
 
-    - name: Discover and Run Binaries
+    - name: Discover, Run, and Summarize Binaries
+      id: run_step
       run: |
         set -e
         DAY_TO_RUN="${{ github.event.inputs.day }}"
 
         # Use 'src_path' which is the correct key for the file path in cargo metadata.
-        # The path is absolute on the runner.
         BINS_JSON=$(cargo metadata --no-deps --format-version 1 | jq -c '[.packages[0].targets[] | select(.kind[0] == "bin") | {name: .name, path: .src_path}]')
 
         if [[ "$DAY_TO_RUN" == "all" ]]; then
@@ -49,18 +49,26 @@ jobs:
           BINS_TO_RUN=$(echo $BINS_JSON | jq -r '.[].name')
         else
           echo "Preparing to run binaries for '$DAY_TO_RUN'..."
-          # Filter binaries where the absolute path contains the pattern '/src/days/<day_folder>/'
           BINS_TO_RUN=$(echo $BINS_JSON | jq -r --arg day "$DAY_TO_RUN" '.[] | select(.path | contains("/src/days/" + $day + "/")) | .name')
         fi
 
         if [[ -z "$BINS_TO_RUN" ]]; then
           echo "No binaries found for '$DAY_TO_RUN'. Nothing to do."
+          echo "## :warning: No Binaries Found" >> $GITHUB_STEP_SUMMARY
+          echo "No binaries were found for the selection **$DAY_TO_RUN**." >> $GITHUB_STEP_SUMMARY
           exit 0
         fi
 
         echo "Found binaries to run:"
         echo "$BINS_TO_RUN"
         echo "-------------------------"
+
+        # Prepare the Summary Header
+        echo "# :rocket: Rust Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Day:** \`$DAY_TO_RUN\`" >> $GITHUB_STEP_SUMMARY
+        echo "**Verbosity:** ${{ github.event.inputs.verbosity }}"
+        echo "***" >> $GITHUB_STEP_SUMMARY
 
         # Set the --quiet flag based on the 'verbosity' input
         VERBOSITY_FLAG=""
@@ -71,6 +79,21 @@ jobs:
         for bin in $BINS_TO_RUN; do
           echo ""
           echo "--- Running binary: $bin ---"
-          cargo run $VERBOSITY_FLAG --bin "$bin"
+          
+          # Run the command, capturing stdout, while still showing stderr in the logs
+          OUTPUT=$(cargo run $VERBOSITY_FLAG --bin "$bin")
+          
+          # Also print the output to the regular log
+          echo "$OUTPUT"
           echo "--- Finished binary: $bin ---"
-        done
+
+          # Append the output to the GitHub Step Summary
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### $bin" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          if [[ -z "$OUTPUT" ]]; then
+            echo "(No output)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "$OUTPUT" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo '```' >> $GITHUB_STEP_SUMMARY
