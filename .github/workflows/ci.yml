@@ -8,6 +8,14 @@ on:
         required: true
         default: 'all'
         type: string
+      verbosity:
+        description: "Log level (quiet: binary output only, full: include build status)"
+        required: true
+        default: 'quiet'
+        type: choice
+        options:
+        - quiet
+        - full
 
 jobs:
   build_and_run:
@@ -54,9 +62,15 @@ jobs:
         echo "$BINS_TO_RUN"
         echo "-------------------------"
 
+        # Set the --quiet flag based on the 'verbosity' input
+        VERBOSITY_FLAG=""
+        if [[ "${{ github.event.inputs.verbosity }}" == "quiet" ]]; then
+          VERBOSITY_FLAG="--quiet"
+        fi
+
         for bin in $BINS_TO_RUN; do
           echo ""
           echo "--- Running binary: $bin ---"
-          cargo run --bin "$bin"
+          cargo run $VERBOSITY_FLAG --bin "$bin"
           echo "--- Finished binary: $bin ---"
         done

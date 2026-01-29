@@ -1,5 +1,3 @@
-mod greetings;
-
 fn main() {
     let mut current_temp = 25;
 
