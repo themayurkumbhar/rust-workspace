@@ -63,11 +63,11 @@ jobs:
         echo "$BINS_TO_RUN"
         echo "-------------------------"
 
-        # Prepare the Summary Header
+        # Prepare the Summary Header using printf for safer formatting
         echo "# :rocket: Rust Execution Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**Day:** \`$DAY_TO_RUN\`" >> $GITHUB_STEP_SUMMARY
-        echo "**Verbosity:** ${{ github.event.inputs.verbosity }}"
+        printf '**Day:** `%s`\n' "$DAY_TO_RUN" >> $GITHUB_STEP_SUMMARY
+        printf '**Verbosity:** `%s`\n' "${{ github.event.inputs.verbosity }}" >> $GITHUB_STEP_SUMMARY
         echo "***" >> $GITHUB_STEP_SUMMARY
 
         # Set the --quiet flag based on the 'verbosity' input
@@ -89,7 +89,7 @@ jobs:
 
           # Append the output to the GitHub Step Summary
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### $bin" >> $GITHUB_STEP_SUMMARY
+          printf '### `%s`\n' "$bin" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           if [[ -z "$OUTPUT" ]]; then
             echo "(No output)" >> $GITHUB_STEP_SUMMARY
@@ -97,3 +97,4 @@ jobs:
             echo "$OUTPUT" >> $GITHUB_STEP_SUMMARY
           fi
           echo '```' >> $GITHUB_STEP_SUMMARY
+        done
