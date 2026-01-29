@@ -32,17 +32,17 @@ jobs:
         set -e
         DAY_TO_RUN="${{ github.event.inputs.day }}"
 
-        # Get a list of all binary targets from Cargo.toml in JSON format
-        # Each element will be like: {"name": "greetings", "path": "src/days/day1/greetings.rs"}
-        BINS_JSON=$(cargo metadata --no-deps --format-version 1 | jq -c '[.packages[0].targets[] | select(.kind[0] == "bin") | {name: .name, path: .path | sub("^./"; "")}]')
+        # Use 'src_path' which is the correct key for the file path in cargo metadata.
+        # The path is absolute on the runner.
+        BINS_JSON=$(cargo metadata --no-deps --format-version 1 | jq -c '[.packages[0].targets[] | select(.kind[0] == "bin") | {name: .name, path: .src_path}]')
 
         if [[ "$DAY_TO_RUN" == "all" ]]; then
           echo "Preparing to run all binaries..."
           BINS_TO_RUN=$(echo $BINS_JSON | jq -r '.[].name')
         else
           echo "Preparing to run binaries for '$DAY_TO_RUN'..."
-          # Filter bins where the path starts with "src/days/<selected_day>/"
-          BINS_TO_RUN=$(echo $BINS_JSON | jq -r --arg day "$DAY_TO_RUN" '.[] | select(.path | startswith("src/days/\($day)/")) | .name')
+          # Filter binaries where the absolute path contains the pattern '/src/days/<day_folder>/'
+          BINS_TO_RUN=$(echo $BINS_JSON | jq -r --arg day "$DAY_TO_RUN" '.[] | select(.path | contains("/src/days/" + $day + "/")) | .name')
         fi
 
         if [[ -z "$BINS_TO_RUN" ]]; then
