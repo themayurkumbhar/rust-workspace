@@ -18,6 +18,9 @@ path = "src/bin/day2/scope.rs"
 name = "shadowing"
 path = "src/bin/day3/shadowing.rs"
 
+[[bin]]
+name = "shadowing_values"
+path = "src/bin/day3/shadowing_values.rs"
 
 
 [package]
