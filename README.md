@@ -1,4 +1,4 @@
-# Rust Learning Workspace
+# Rust Learning Workspace [![Rust CI](https://github.com/themayurkumbhar/rust-workspace/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/themayurkumbhar/rust-workspace/actions/workflows/ci.yml)
 
 This repository contains a collection of small Rust programs created as part of a daily learning exercise. The goal is to get hands-on practice with the Rust programming language by exploring its features through simple, focused examples.
 
