@@ -1,0 +1,62 @@
+name: Rust CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Day to run (e.g., 'day1', 'day2', or 'all')"
+        required: true
+        default: 'all'
+        type: string
+
+jobs:
+  build_and_run:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Rust toolchain and cache dependencies
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+    - uses: Swatinem/rust-cache@v2
+
+    - name: Build all binaries
+      run: cargo build --bins --verbose
+
+    - name: Discover and Run Binaries
+      run: |
+        set -e
+        DAY_TO_RUN="${{ github.event.inputs.day }}"
+
+        # Get a list of all binary targets from Cargo.toml in JSON format
+        # Each element will be like: {"name": "greetings", "path": "src/days/day1/greetings.rs"}
+        BINS_JSON=$(cargo metadata --no-deps --format-version 1 | jq -c '[.packages[0].targets[] | select(.kind[0] == "bin") | {name: .name, path: .path | sub("^./"; "")}]')
+
+        if [[ "$DAY_TO_RUN" == "all" ]]; then
+          echo "Preparing to run all binaries..."
+          BINS_TO_RUN=$(echo $BINS_JSON | jq -r '.[].name')
+        else
+          echo "Preparing to run binaries for '$DAY_TO_RUN'..."
+          # Filter bins where the path starts with "src/days/<selected_day>/"
+          BINS_TO_RUN=$(echo $BINS_JSON | jq -r --arg day "$DAY_TO_RUN" '.[] | select(.path | startswith("src/days/\($day)/")) | .name')
+        fi
+
+        if [[ -z "$BINS_TO_RUN" ]]; then
+          echo "No binaries found for '$DAY_TO_RUN'. Nothing to do."
+          exit 0
+        fi
+
+        echo "Found binaries to run:"
+        echo "$BINS_TO_RUN"
+        echo "-------------------------"
+
+        for bin in $BINS_TO_RUN; do
+          echo ""
+          echo "--- Running binary: $bin ---"
+          cargo run --bin "$bin"
+          echo "--- Finished binary: $bin ---"
+        done
