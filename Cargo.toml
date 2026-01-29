@@ -14,6 +14,11 @@ path = "src/bin/day2/constants.rs"
 name = "scope"
 path = "src/bin/day2/scope.rs"
 
+[[bin]]
+name = "shadowing"
+path = "src/bin/day3/shadowing.rs"
+
+
 
 [package]
 name = "rust-workspace"
