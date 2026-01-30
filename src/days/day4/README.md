@@ -29,4 +29,4 @@ Create a program that demonstrates this difference.
 > Integer: 2
 > Float: 2.5
 
-[🚀 Run this code in Rust Playground](<YOUR_PLAYGROUND_LINK_HERE>)
+[🚀 Run this code in Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&code=fn+main%28%29+%7B%0D%0A++++%2F%2F+integers+division+behaviour%0D%0A++++let+int_division+%3D+9+%2F+2%3B%0D%0A++++println%21%28%22Value+of+integer+division%3A+%7B%7D%22%2C+int_division%29%3B+%2F%2F+drops+decimals%0D%0A%0D%0A++++%2F%2F+float+division+behaviour%0D%0A++++let+float_division+%3D+9.0+%2F+2.0%3B%0D%0A++++println%21%28%22Value+of+float+division%3A+%7B%7D%22%2C+float_division%29%3B+%2F%2F+keeps+decimals%0D%0A%7D)
