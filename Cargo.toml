@@ -22,6 +22,9 @@ path = "src/days/day3/shadowing.rs"
 name = "shadowing_values"
 path = "src/days/day3/shadowing_values.rs"
 
+[[bin]]
+name = "strict_math"
+path = "src/days/day4/strict_math.rs"
 
 [package]
 name = "rust-workspace"
