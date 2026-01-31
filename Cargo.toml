@@ -34,6 +34,10 @@ path = "src/days/day4/division.rs"
 name = "booleans"
 path = "src/days/day5/booleans.rs"
 
+[[bin]]
+name = "chars"
+path = "src/days/day5/chars.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
