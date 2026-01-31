@@ -3,7 +3,7 @@
 
 **The Challenge**
 Create a program that attempts to add an integer and a float.
-1. Create a file: `src/bin/day4/strict_math.rs`
+1. Create a file: `src/days/day4/strict_math.rs`
 2. Declare an integer: `let x = 10;`
 3. Declare a float: `let y = 2.5;`
 4. Attempt to print `x + y` (observe the error).
@@ -20,7 +20,7 @@ Create a program that attempts to add an integer and a float.
 
 **The Challenge**
 Create a program that demonstrates this difference.
-1. Create a file: `src/bin/day4/division.rs`
+1. Create a file: `src/days/day4/division.rs`
 2. Define a variable `let a = 5 / 2;`
 3. Define a variable `let b = 5.0 / 2.0;`
 4. Print both variables to see the difference.

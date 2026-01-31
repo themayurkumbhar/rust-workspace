@@ -5,7 +5,7 @@ Context: Reuse a variable name to convert text to a number.
 
 ### Task:
 
-1. Create src/bin/day3/shadowing_types.rs
+1. Create src/days/day3/shadowing_types.rs
 
 2. Declare 'spaces' as a string " ".
 
@@ -25,7 +25,7 @@ Context: Reuse a variable name to convert text to a number.
 
 ### Task:
 
-1. Create src/bin/day3/shadowing_values.rs. 
+1. Create src/days/day3/shadowing_values.rs. 
 2. Start with let x = 5. 
 3. Shadow with let x = x + 1. 
 4. Shadow with let x = x * 2. 
