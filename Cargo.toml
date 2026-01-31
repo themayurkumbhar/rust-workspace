@@ -30,6 +30,10 @@ path = "src/days/day4/strict_math.rs"
 name = "division"
 path = "src/days/day4/division.rs"
 
+[[bin]]
+name = "booleans"
+path = "src/days/day5/booleans.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
