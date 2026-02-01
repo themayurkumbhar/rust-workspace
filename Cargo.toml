@@ -38,6 +38,10 @@ path = "src/days/day5/booleans.rs"
 name = "chars"
 path = "src/days/day5/chars.rs"
 
+[[bin]]
+name = "tuple_basics"
+path = "src/days/day6/tuple_basics.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
