@@ -42,6 +42,10 @@ path = "src/days/day5/chars.rs"
 name = "tuple_basics"
 path = "src/days/day6/tuple_basics.rs"
 
+[[bin]]
+name = "destructuring"
+path = "src/days/day6/destructuring.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
