@@ -50,6 +50,10 @@ path = "src/days/day6/destructuring.rs"
 name = "array_basics"
 path = "src/days/day7/array_basics.rs"
 
+[[bin]]
+name = "debug_print"
+path = "src/days/day7/debug_print.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
