@@ -58,6 +58,11 @@ path = "src/days/day7/debug_print.rs"
 name = "infinite_loop"
 path = "src/days/day8/infinite_loop.rs"
 
+[[bin]]
+name = "loop_return"
+path = "src/days/day8/loop_return.rs"
+
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
