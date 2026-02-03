@@ -54,6 +54,10 @@ path = "src/days/day7/array_basics.rs"
 name = "debug_print"
 path = "src/days/day7/debug_print.rs"
 
+[[bin]]
+name = "infinite_loop"
+path = "src/days/day8/infinite_loop.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
