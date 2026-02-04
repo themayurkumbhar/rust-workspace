@@ -66,6 +66,10 @@ path = "src/days/day8/loop_return.rs"
 name = "while_countdown"
 path = "src/days/day9/while_countdown.rs"
 
+[[bin]]
+name = "while_array"
+path = "src/days/day9/while_array.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
