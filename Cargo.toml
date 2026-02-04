@@ -62,6 +62,9 @@ path = "src/days/day8/infinite_loop.rs"
 name = "loop_return"
 path = "src/days/day8/loop_return.rs"
 
+[[bin]]
+name = "while_countdown"
+path = "src/days/day9/while_countdown.rs"
 
 [package]
 name = "rust-workspace"
