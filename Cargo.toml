@@ -74,6 +74,10 @@ path = "src/days/day9/while_array.rs"
 name = "for_array"
 path = "src/days/day10/for_array.rs"
 
+[[bin]]
+name = "for_range"
+path = "src/days/day10/for_range.rs"
+
 [package]
 name = "rust-workspace"
 version = "0.1.0"
