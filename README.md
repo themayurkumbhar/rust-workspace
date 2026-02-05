@@ -8,6 +8,14 @@ The workspace is organized by day, with each `src/days/day<N>` directory represe
 
 The `Cargo.toml` file is set up to treat each example `.rs` file as a separate executable binary. This allows each program to be run independently.
 
+---
+
+## 📊 Quick Links
+* 🏆 **[Achievements Summary](Achievements.md)** - A day-by-day breakdown of concepts learned.
+* 📝 **[My Technical Blogs](https://medium.com/@themayurkumbhar)** - Deep dives into Rust control flow and more.
+
+---
+
 ## Building and Running
 
 You can build and run these programs using standard Cargo commands.
